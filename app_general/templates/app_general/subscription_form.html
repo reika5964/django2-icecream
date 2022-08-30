@@ -1,0 +1,41 @@
+{% extends 'app_general/components/base.html' %}
+
+{% block site_title %}プログラミング登録 | {% endblock %}
+
+{% block content %}
+<section class="content-section content-section-single">
+    <div class="content-container content-container-narrow">
+        <h2>プログラミングを受け取る</h2>
+        <p>本名で入力してください。</p>
+        <form class="subscription-form" action="{% url 'subscription' %}" method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class = "form-field">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {{ form.name.errors }}
+            </div>
+            <div class = "form-field">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <div class = "form-field">
+                {{ form.food_set.label_tag }}
+                {{ form.food_set }}
+                {{ form.food_set.errors }}
+            </div>
+            <div class = "form-field">
+                <label>
+                    {{ form.accepted }} {{ form.accepted.label }}
+                </label>
+                {{ form.accepted.errors }}
+                <label>上記の個人情報取り扱い事項について同意します</label>
+            </div>
+            <div class = "form-field">
+                <button class="button button-primary" type="submit">登録</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

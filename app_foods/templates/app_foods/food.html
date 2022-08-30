@@ -1,0 +1,37 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block site_title %}{{food.title}} | {% endblock %}
+
+{% block content %}
+<section class="content-section content-section-single">
+    <div class="content-container">
+        {% if food is not None%}
+            <div class="grid grid-2">
+                <img class="image-block" src="{% static food.image_relative_url %}" alt="">
+                <div>
+                    <h3>{{ food.title }}</h3>
+                    {% if food.special_price is not None%}
+                        <p>
+                            <span>￥{{ food.special_price|floatformat:'g' }}</span>
+                            <del class="text-gray">￥{{ food.price|floatformat:'g'}}</del>
+                        </p>
+                    {% else %}
+                        <p>￥{{ food.price|floatformat:'g'}}</p>
+                    {% endif %}    
+                    {% if food.is_premium %}  
+                        <p>*** Premium flavor ***</p>
+                    {% endif %}
+                    <p>特別価額は{{food.promotion_end_at|date:'Y/m/j'}}まで</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae obcaecati earum accusantium dignissimos voluptate facilis, ipsa tenetur reprehenderit tempora saepe. Quas error cupiditate esse omnis et. Earum explicabo dicta cumque?</p>
+                    <p>
+                        <a class=" button button-primary" href="{% url 'subscription' %}">プロモーションを受け取る</a>
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <p>no this menu now!</p>
+        {% endif %}
+    </div>   
+</section>    
+{% endblock %}
